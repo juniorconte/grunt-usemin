@@ -318,6 +318,12 @@ describe('FileProcessor', function() {
       assert.equal(replaced, '<img src="' + filemapping['app/image.png'] + '">');
     });
 
+    it('should replace SVG pattern image reference with revved version', function() {
+        var content = '<image xlink:href="image.png"></image>';
+        var replaced = fp.replaceWithRevved(content, ['app']);
+        assert.equal(replaced, '<image xlink:href="' + filemapping['app/image.png'] + '"></image>');
+      });
+
     it('should replace data reference with revved version', function () {
       var content = '<li data-lang="fr" data-src="image.png"></li>';
       var replaced = fp.replaceWithRevved(content, ['app']);
